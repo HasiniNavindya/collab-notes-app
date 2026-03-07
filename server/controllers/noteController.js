@@ -107,3 +107,40 @@ exports.searchNotes = async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 };
+
+// Add Collaborator
+exports.addCollaborator = async (req, res) => {
+  try {
+    const { email } = req.body;
+
+    const note = await Note.findById(req.params.id);
+    if (!note) return res.status(404).json({ message: "Note not found" });
+
+    // Only owner can add collaborators
+    if (note.owner.toString() !== req.user) {
+      return res.status(403).json({ message: "Only owner can add collaborators" });
+    }
+
+    const User = require("../models/User");
+
+    const collaborator = await User.findOne({ email });
+    if (!collaborator) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    if (note.collaborators.includes(collaborator._id)) {
+      return res.status(400).json({ message: "User already collaborator" });
+    }
+
+    note.collaborators.push(collaborator._id);
+    await note.save();
+
+    res.json({
+      message: "Collaborator added",
+      note
+    });
+
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
