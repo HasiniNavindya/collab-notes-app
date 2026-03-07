@@ -15,6 +15,9 @@ app.use("/api/auth", authRoutes);
 app.get("/", (req, res) => {
   res.send("API Running");
 });
+const noteRoutes = require("./routes/noteRoutes");
+
+app.use("/api/notes", noteRoutes);
 
 mongoose.connect(process.env.MONGO_URI)
 .then(() => console.log("✅ MongoDB Connected Successfully"))
