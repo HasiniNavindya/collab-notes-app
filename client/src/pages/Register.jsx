@@ -22,7 +22,7 @@ export default function Register() {
   return (
     <div className="flex h-screen">
       {/* Left Side - Image Background */}
-      <div className="hidden md:flex md:w-2/5 bg-white items-center justify-center p-12 border-r border-gray-200">
+      <div className="hidden md:flex md:w-2/5 bg-white items-center justify-center p-12">
         <img
           src="/image.png"
           alt="Collaboration"
@@ -33,7 +33,7 @@ export default function Register() {
       {/* Right Side - Register Form */}
       <div className="w-full md:w-3/5 flex items-center justify-center bg-gray-50 px-8">
         <div className="w-full max-w-md">
-          <form onSubmit={handleRegister} className="bg-white rounded-2xl shadow-2xl p-8 border border-gray-200">
+          <form onSubmit={handleRegister} className="bg-emerald-50 rounded-2xl shadow-2xl p-8 border border-gray-200">
             <div className="text-center mb-6">
               <h1 className="text-2xl font-bold text-emerald-600 mb-2">Welcome to Collab Notes</h1>
             </div>
