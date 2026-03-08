@@ -144,3 +144,50 @@ exports.addCollaborator = async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 };
+
+// Get Collaborators
+exports.getCollaborators = async (req, res) => {
+  try {
+    const note = await Note.findById(req.params.id).populate("collaborators", "name email");
+    
+    if (!note) return res.status(404).json({ message: "Note not found" });
+
+    // Check if user has access to this note
+    if (
+      note.owner.toString() !== req.user &&
+      !note.collaborators.some(c => c._id.toString() === req.user)
+    ) {
+      return res.status(403).json({ message: "Not authorized" });
+    }
+
+    res.json(note.collaborators);
+
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
+
+// Remove Collaborator
+exports.removeCollaborator = async (req, res) => {
+  try {
+    const note = await Note.findById(req.params.id);
+    
+    if (!note) return res.status(404).json({ message: "Note not found" });
+
+    // Only owner can remove collaborators
+    if (note.owner.toString() !== req.user) {
+      return res.status(403).json({ message: "Only owner can remove collaborators" });
+    }
+
+    note.collaborators = note.collaborators.filter(
+      c => c.toString() !== req.params.userId
+    );
+
+    await note.save();
+
+    res.json({ message: "Collaborator removed" });
+
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};

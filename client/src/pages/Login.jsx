@@ -27,10 +27,10 @@ export default function Login() {
     <div className="flex h-screen">
       {/* Left Side - Image Background */}
       <div 
-        className="hidden md:flex md:w-2/5 bg-cover bg-center"
+        className="hidden md:flex md:w-2/5 bg-contain bg-center bg-no-repeat p-8"
         style={{
           backgroundImage: "url('https://img.freepik.com/free-vector/teamwork-collaboration-business-concept-partnership-support-communication-work-vector-flat-illustration-with-people-assembling-jigsaw-with-puzzle-pieces-together_107791-7652.jpg?semt=ais_rp_50_assets&w=740&q=80')",
-          backgroundColor: '#E9D5FF'
+          backgroundSize: '90%'
         }}
       >
       </div>
@@ -38,7 +38,7 @@ export default function Login() {
       {/* Right Side - Login Form */}
       <div className="w-full md:w-3/5 flex items-center justify-center bg-gray-50 px-8">
         <div className="w-full max-w-md">
-          <form onSubmit={handleLogin} className="bg-white rounded-2xl shadow-xl p-8">
+          <form onSubmit={handleLogin} className="bg-purple-50 rounded-2xl shadow-xl p-8">
             <div className="text-center mb-6">
               <h1 className="text-2xl font-bold text-purple-700 mb-2">Welcome to Collab Notes</h1>
             </div>

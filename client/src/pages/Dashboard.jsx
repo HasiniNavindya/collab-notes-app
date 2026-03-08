@@ -29,52 +29,58 @@ export default function Dashboard() {
   }, []);
 
   return (
-    <div className="flex h-screen">
+    <div className="flex h-screen bg-gradient-to-br from-purple-50 to-purple-100">
       {/* Sidebar */}
-      <div className="w-1/4 bg-gray-100 p-4 flex flex-col">
-        <div className="flex justify-between items-center mb-4">
-          <h2 className="text-xl font-bold">My Notes</h2>
+      <div className="w-80 bg-white shadow-xl p-6 flex flex-col border-r border-purple-100">
+        <div className="flex justify-between items-center mb-6">
+          <h2 className="text-2xl font-bold text-purple-700">My Notes</h2>
           <button
             onClick={handleLogout}
-            className="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded text-sm"
+            className="bg-red-500 hover:bg-red-600 text-white px-3 py-1.5 rounded-lg text-sm transition duration-200 shadow-md"
           >
             Logout
           </button>
         </div>
 
         <input
-          className="border p-2 w-full mb-3"
+          className="border border-purple-200 p-3 w-full mb-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
           placeholder="Search notes..."
           onChange={(e) => setSearch(e.target.value)}
         />
 
         <button
           onClick={searchNotes}
-          className="bg-gray-700 text-white p-2 w-full mb-3"
+          className="bg-purple-600 hover:bg-purple-700 text-white p-3 w-full mb-3 rounded-lg transition duration-200 shadow-md font-medium"
         >
           Search
         </button>
 
         <button
           onClick={() => setSelectedNote(null)}
-          className="bg-green-500 text-white p-2 w-full mb-3"
+          className="bg-purple-500 hover:bg-purple-600 text-white p-3 w-full mb-4 rounded-lg transition duration-200 shadow-md font-medium"
         >
-          New Note
+          + New Note
         </button>
 
-        {notes.map((note) => (
-          <div
-            key={note._id}
-            className="p-2 bg-white mb-2 cursor-pointer"
-            onClick={() => setSelectedNote(note)}
-          >
-            {note.title}
-          </div>
-        ))}
+        <div className="flex-1 overflow-y-auto">
+          {notes.map((note) => (
+            <div
+              key={note._id}
+              className={`p-3 mb-2 cursor-pointer rounded-lg transition duration-200 ${
+                selectedNote?._id === note._id
+                  ? 'bg-purple-100 border-2 border-purple-600'
+                  : 'bg-purple-50 hover:bg-purple-100 border border-purple-200'
+              }`}
+              onClick={() => setSelectedNote(note)}
+            >
+              <h3 className="font-semibold text-gray-800 truncate">{note.title || 'Untitled'}</h3>
+            </div>
+          ))}
+        </div>
       </div>
 
       {/* Editor */}
-      <div className="flex-1 p-4">
+      <div className="flex-1 p-8">
         <NoteEditor note={selectedNote} refreshNotes={fetchNotes} />
       </div>
     </div>

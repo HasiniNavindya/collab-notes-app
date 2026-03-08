@@ -1,9 +1,11 @@
 import { useState, useEffect } from "react";
 import API from "../services/api";
+import CollaboratorModal from "./CollaboratorModal";
 
 export default function NoteEditor({ note, refreshNotes }) {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
+  const [showCollaborators, setShowCollaborators] = useState(false);
 
   useEffect(() => {
     if (note) {
@@ -31,36 +33,54 @@ export default function NoteEditor({ note, refreshNotes }) {
   };
 
   return (
-    <div>
+    <div className="bg-white rounded-2xl shadow-xl p-8 h-full flex flex-col">
       <input
-        className="border p-2 w-full mb-3 rounded"
+        className="border-2 border-purple-200 p-4 w-full mb-4 rounded-lg text-xl font-semibold focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
         placeholder="Note Title"
         value={title}
         onChange={(e) => setTitle(e.target.value)}
       />
 
       <textarea
-        className="border p-2 w-full mb-3 rounded min-h-96"
-        placeholder="Note Content"
+        className="border-2 border-purple-200 p-4 w-full mb-4 rounded-lg flex-1 resize-none focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
+        placeholder="Start writing your note..."
         value={content}
         onChange={(e) => setContent(e.target.value)}
       />
 
-      <div className="mt-3 flex gap-2">
+      <div className="flex gap-3">
         <button
           onClick={saveNote}
-          className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+          className="bg-purple-600 hover:bg-purple-700 text-white px-6 py-3 rounded-lg font-semibold transition duration-200 shadow-lg"
         >
-          Save
+          Save Note
         </button>
 
-        <button
-          onClick={deleteNote}
-          className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600"
-        >
-          Delete
-        </button>
+        {note && (
+          <>
+            <button
+              onClick={() => setShowCollaborators(true)}
+              className="bg-purple-500 hover:bg-purple-600 text-white px-6 py-3 rounded-lg font-semibold transition duration-200 shadow-lg"
+            >
+              Manage Collaborators
+            </button>
+
+            <button
+              onClick={deleteNote}
+              className="bg-red-500 hover:bg-red-600 text-white px-6 py-3 rounded-lg font-semibold transition duration-200 shadow-lg"
+            >
+              Delete Note
+            </button>
+          </>
+        )}
       </div>
+
+      {showCollaborators && note && (
+        <CollaboratorModal
+          noteId={note._id}
+          onClose={() => setShowCollaborators(false)}
+        />
+      )}
     </div>
   );
 }
