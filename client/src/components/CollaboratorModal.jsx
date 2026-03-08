@@ -44,12 +44,12 @@ export default function CollaboratorModal({ noteId, onClose }) {
 
   return (
     <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 animate-fadeIn">
-      <div className="bg-white rounded-2xl shadow-2xl p-8 w-full max-w-md transform transition-all animate-slideUp">
+      <div className="bg-white rounded-2xl shadow-2xl p-8 w-full max-w-md transform transition-all animate-slideUp border border-gray-200">
         <div className="flex justify-between items-center mb-6">
-          <h2 className="text-2xl font-bold text-purple-700">Manage Collaborators</h2>
+          <h2 className="text-2xl font-bold text-emerald-600">Manage Collaborators</h2>
           <button
             onClick={onClose}
-            className="text-gray-400 hover:text-gray-600 text-3xl font-light leading-none"
+            className="text-gray-400 hover:text-gray-600 text-3xl font-light leading-none transition duration-200"
           >
             ×
           </button>
@@ -61,14 +61,14 @@ export default function CollaboratorModal({ noteId, onClose }) {
             <input
               type="email"
               placeholder="colleague@example.com"
-              className="flex-1 border-2 border-purple-200 p-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
+              className="flex-1 bg-white border-2 border-gray-300 p-3 rounded-lg text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
             />
             <button
               type="submit"
-              className="bg-purple-600 hover:bg-purple-700 text-white px-6 py-3 rounded-lg font-semibold transition duration-200 shadow-md"
+              className="bg-gradient-to-r from-emerald-600 to-emerald-700 hover:from-emerald-700 hover:to-emerald-800 text-white px-6 py-3 rounded-lg font-semibold transition duration-200 shadow-md"
             >
               Add
             </button>
@@ -84,15 +84,15 @@ export default function CollaboratorModal({ noteId, onClose }) {
               collaborators.map((collab) => (
                 <div
                   key={collab._id}
-                  className="flex justify-between items-center p-3 bg-purple-50 rounded-lg border border-purple-200"
+                  className="flex justify-between items-center p-3 bg-gray-50 rounded-lg border border-gray-200"
                 >
                   <div>
-                    <p className="font-medium text-gray-800">{collab.name}</p>
+                    <p className="font-medium text-gray-900">{collab.name}</p>
                     <p className="text-sm text-gray-600">{collab.email}</p>
                   </div>
                   <button
                     onClick={() => removeCollaborator(collab._id)}
-                    className="bg-red-500 hover:bg-red-600 text-white px-3 py-1.5 rounded-lg text-sm transition duration-200 shadow-sm"
+                    className="bg-red-600 hover:bg-red-700 text-white px-3 py-1.5 rounded-lg text-sm transition duration-200 shadow-sm"
                   >
                     Remove
                   </button>

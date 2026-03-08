@@ -29,35 +29,35 @@ export default function Dashboard() {
   }, []);
 
   return (
-    <div className="flex h-screen bg-gradient-to-br from-purple-50 to-purple-100">
+    <div className="flex h-screen bg-gray-50">
       {/* Sidebar */}
-      <div className="w-80 bg-white shadow-xl p-6 flex flex-col border-r border-purple-100">
+      <div className="w-80 bg-white shadow-2xl p-6 flex flex-col border-r border-gray-200">
         <div className="flex justify-between items-center mb-6">
-          <h2 className="text-2xl font-bold text-purple-700">My Notes</h2>
+          <h2 className="text-2xl font-bold text-emerald-600">My Notes</h2>
           <button
             onClick={handleLogout}
-            className="bg-red-500 hover:bg-red-600 text-white px-3 py-1.5 rounded-lg text-sm transition duration-200 shadow-md"
+            className="bg-red-600 hover:bg-red-700 text-white px-3 py-1.5 rounded-lg text-sm transition duration-200 shadow-md"
           >
             Logout
           </button>
         </div>
 
         <input
-          className="border border-purple-200 p-3 w-full mb-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
+          className="bg-white border border-gray-300 p-3 w-full mb-3 rounded-lg text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
           placeholder="Search notes..."
           onChange={(e) => setSearch(e.target.value)}
         />
 
         <button
           onClick={searchNotes}
-          className="bg-purple-600 hover:bg-purple-700 text-white p-3 w-full mb-3 rounded-lg transition duration-200 shadow-md font-medium"
+          className="bg-gradient-to-r from-emerald-600 to-emerald-700 hover:from-emerald-700 hover:to-emerald-800 text-white p-3 w-full mb-3 rounded-lg transition duration-200 shadow-md font-medium"
         >
           Search
         </button>
 
         <button
           onClick={() => setSelectedNote(null)}
-          className="bg-purple-500 hover:bg-purple-600 text-white p-3 w-full mb-4 rounded-lg transition duration-200 shadow-md font-medium"
+          className="bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-600 hover:to-emerald-700 text-white p-3 w-full mb-4 rounded-lg transition duration-200 shadow-md font-medium"
         >
           + New Note
         </button>
@@ -68,12 +68,12 @@ export default function Dashboard() {
               key={note._id}
               className={`p-3 mb-2 cursor-pointer rounded-lg transition duration-200 ${
                 selectedNote?._id === note._id
-                  ? 'bg-purple-100 border-2 border-purple-600'
-                  : 'bg-purple-50 hover:bg-purple-100 border border-purple-200'
+                  ? 'bg-emerald-50 border-2 border-emerald-500'
+                  : 'bg-gray-50 hover:bg-gray-100 border border-gray-200'
               }`}
               onClick={() => setSelectedNote(note)}
             >
-              <h3 className="font-semibold text-gray-800 truncate">{note.title || 'Untitled'}</h3>
+              <h3 className="font-semibold text-gray-900 truncate">{note.title || 'Untitled'}</h3>
             </div>
           ))}
         </div>
