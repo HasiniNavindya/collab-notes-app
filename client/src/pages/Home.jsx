@@ -111,7 +111,7 @@ export default function Home() {
           <div className="hidden md:block">
             <div className="relative">
               <img
-                src="/collaboration-image.svg"
+                src="/image.png"
                 alt="Collaboration"
                 className="w-full h-96 object-contain"
               />
