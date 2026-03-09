@@ -3,11 +3,14 @@ const Note = require("../models/Note");
 // Create Note
 exports.createNote = async (req, res) => {
   try {
-    const { title, content } = req.body;
+    const { title, content, tags, color, pinned } = req.body;
 
     const note = await Note.create({
       title,
       content,
+      tags: tags || [],
+      color: color || 'gray',
+      pinned: pinned || false,
       owner: req.user
     });
 
@@ -55,6 +58,9 @@ exports.updateNote = async (req, res) => {
 
     note.title = req.body.title || note.title;
     note.content = req.body.content || note.content;
+    if (req.body.tags !== undefined) note.tags = req.body.tags;
+    if (req.body.color !== undefined) note.color = req.body.color;
+    if (req.body.pinned !== undefined) note.pinned = req.body.pinned;
 
     await note.save();
 

@@ -133,10 +133,10 @@ export default function NoteEditor({ note, refreshNotes }) {
             {/* Pin Toggle */}
             <button
               onClick={() => setPinned(!pinned)}
-              className={`text-2xl hover:scale-110 transition duration-200 ${pinned ? 'text-yellow-500' : 'text-gray-400'}`}
+              className={`px-3 py-1.5 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 text-sm font-medium transition duration-200 ${pinned ? 'text-yellow-600 border-yellow-400' : ''}`}
               title={pinned ? "Unpin note" : "Pin note"}
             >
-              📌
+              {pinned ? 'Pinned' : 'Pin'}
             </button>
             
             {/* Color Picker */}
@@ -146,7 +146,7 @@ export default function NoteEditor({ note, refreshNotes }) {
                 className="px-3 py-1.5 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 text-sm font-medium transition duration-200"
                 title="Change color"
               >
-                🎨 Color
+                Color
               </button>
               {showColorPicker && (
                 <div className="absolute top-full mt-2 bg-white border-2 border-gray-300 rounded-lg shadow-xl p-3 z-10">
@@ -172,28 +172,8 @@ export default function NoteEditor({ note, refreshNotes }) {
                 onClick={() => setShowTemplates(!showTemplates)}
                 className="px-3 py-1.5 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 text-sm font-medium transition duration-200"
               >
-                📋 Templates
+                Templates
               </button>
-            )}
-
-            {/* Export Dropdown */}
-            {note && (
-              <div className="relative group">
-                <button className="px-3 py-1.5 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 text-sm font-medium transition duration-200">
-                  📥 Export
-                </button>
-                <div className="absolute top-full mt-2 bg-white border-2 border-gray-300 rounded-lg shadow-xl p-2 hidden group-hover:block z-10">
-                  <button onClick={() => exportNote('txt')} className="block w-full text-left px-4 py-2 hover:bg-gray-100 rounded text-sm">
-                    📄 Text (.txt)
-                  </button>
-                  <button onClick={() => exportNote('md')} className="block w-full text-left px-4 py-2 hover:bg-gray-100 rounded text-sm">
-                    📝 Markdown (.md)
-                  </button>
-                  <button onClick={() => exportNote('json')} className="block w-full text-left px-4 py-2 hover:bg-gray-100 rounded text-sm">
-                    🔧 JSON (.json)
-                  </button>
-                </div>
-              </div>
             )}
 
             {/* Duplicate Button */}
@@ -203,7 +183,7 @@ export default function NoteEditor({ note, refreshNotes }) {
                 className="px-3 py-1.5 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 text-sm font-medium transition duration-200"
                 title="Duplicate note"
               >
-                📋 Duplicate
+                Duplicate
               </button>
             )}
           </div>
@@ -216,7 +196,6 @@ export default function NoteEditor({ note, refreshNotes }) {
                 </span>
                 {note.collaborators && note.collaborators.length > 0 && (
                   <span className="flex items-center gap-1 text-sm text-emerald-600 bg-emerald-50 px-3 py-1 rounded-full border border-emerald-200">
-                    <span>👥</span>
                     <span>{note.collaborators.length} collaborator{note.collaborators.length !== 1 ? 's' : ''}</span>
                   </span>
                 )}
@@ -232,7 +211,7 @@ export default function NoteEditor({ note, refreshNotes }) {
               key={tag}
               className="flex items-center gap-1 bg-emerald-100 text-emerald-700 px-3 py-1 rounded-full text-sm border border-emerald-300"
             >
-              <span>🏷️ {tag}</span>
+              <span>{tag}</span>
               <button
                 onClick={() => removeTag(tag)}
                 className="text-emerald-600 hover:text-emerald-800 font-bold"
@@ -298,8 +277,8 @@ export default function NoteEditor({ note, refreshNotes }) {
       {/* Stats Bar */}
       <div className="mb-4 text-sm text-gray-600 flex items-center justify-between bg-white rounded-lg p-3 border border-gray-300">
         <div className="flex items-center gap-4">
-          {!note && <span className="text-emerald-600 font-medium">✨ New note</span>}
-          {pinned && <span className="text-yellow-600 font-medium">📌 Pinned</span>}
+          {!note && <span className="text-emerald-600 font-medium">New note</span>}
+          {pinned && <span className="text-yellow-600 font-medium">Pinned</span>}
           {tags.length > 0 && <span className="text-gray-500">{tags.length} {tags.length === 1 ? 'tag' : 'tags'}</span>}
         </div>
         <div>
@@ -312,7 +291,7 @@ export default function NoteEditor({ note, refreshNotes }) {
           onClick={saveNote}
           className="bg-gradient-to-r from-emerald-600 to-emerald-700 hover:from-emerald-700 hover:to-emerald-800 text-white px-6 py-3 rounded-lg font-semibold transition duration-200 shadow-lg"
         >
-          💾 Save Note
+          Save Note
         </button>
 
         {note && (
@@ -321,14 +300,14 @@ export default function NoteEditor({ note, refreshNotes }) {
               onClick={() => setShowCollaborators(true)}
               className="bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-600 hover:to-emerald-700 text-white px-6 py-3 rounded-lg font-semibold transition duration-200 shadow-lg"
             >
-              👥 Collaborators
+              Collaborators
             </button>
 
             <button
               onClick={() => setShowDeleteConfirm(true)}
               className="bg-red-600 hover:bg-red-700 text-white px-6 py-3 rounded-lg font-semibold transition duration-200 shadow-lg"
             >
-              🗑️ Delete
+              Delete
             </button>
           </>
         )}

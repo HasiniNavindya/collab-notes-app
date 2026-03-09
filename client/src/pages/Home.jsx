@@ -96,15 +96,12 @@ export default function Home() {
             {/* Features */}
             <div className="mt-12 grid grid-cols-3 gap-6">
               <div className="text-center p-4 bg-emerald-50 rounded-xl border border-emerald-200 hover:shadow-md transition duration-200">
-                <div className="text-3xl mb-2">✓</div>
                 <p className="text-sm font-semibold text-gray-700">Real-time Collaboration</p>
               </div>
               <div className="text-center p-4 bg-emerald-50 rounded-xl border border-emerald-200 hover:shadow-md transition duration-200">
-                <div className="text-3xl mb-2">⚡</div>
                 <p className="text-sm font-semibold text-gray-700">Fast & Secure</p>
               </div>
               <div className="text-center p-4 bg-emerald-50 rounded-xl border border-emerald-200 hover:shadow-md transition duration-200">
-                <div className="text-3xl mb-2">🔍</div>
                 <p className="text-sm font-semibold text-gray-700">Powerful Search</p>
               </div>
             </div>
@@ -142,7 +139,7 @@ export default function Home() {
             </div>
             <p className="text-emerald-600 mb-8 font-medium">Welcome back to Collab Notes</p>
 
-            <form onSubmit={handleLogin}>
+            <form onSubmit={handleLogin} autoComplete="off">
               <div className="mb-5">
                 <label className="block text-gray-700 mb-2 font-medium">Email</label>
                 <input
@@ -151,6 +148,7 @@ export default function Home() {
                   className="w-full bg-white border border-gray-300 p-3 rounded-lg text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
+                  autoComplete="off"
                   required
                 />
               </div>
@@ -163,6 +161,7 @@ export default function Home() {
                   className="w-full bg-white border border-gray-300 p-3 rounded-lg text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
+                  autoComplete="new-password"
                   required
                 />
               </div>
@@ -200,7 +199,7 @@ export default function Home() {
             </div>
             <p className="text-emerald-600 mb-8 font-medium">Join Collab Notes today</p>
 
-            <form onSubmit={handleRegister}>
+            <form onSubmit={handleRegister} autoComplete="off">
               <div className="mb-5">
                 <label className="block text-gray-700 mb-2 font-medium">Username</label>
                 <input
@@ -209,6 +208,7 @@ export default function Home() {
                   className="w-full bg-white border border-gray-300 p-3 rounded-lg text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
                   value={username}
                   onChange={(e) => setUsername(e.target.value)}
+                  autoComplete="off"
                   required
                 />
               </div>
@@ -221,6 +221,7 @@ export default function Home() {
                   className="w-full bg-white border border-gray-300 p-3 rounded-lg text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
+                  autoComplete="off"
                   required
                 />
               </div>
@@ -233,6 +234,7 @@ export default function Home() {
                   className="w-full bg-white border border-gray-300 p-3 rounded-lg text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
+                  autoComplete="new-password"
                   required
                 />
               </div>

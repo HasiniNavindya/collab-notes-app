@@ -8,7 +8,7 @@ router.post("/login", login);
 router.get("/me", authMiddleware, async (req, res) => {
   try {
     const User = require("../models/User");
-    const user = await User.findById(req.userId).select("-password");
+    const user = await User.findById(req.user).select("-password");
     res.json(user);
   } catch (error) {
     res.status(500).json({ message: "Error fetching user profile" });

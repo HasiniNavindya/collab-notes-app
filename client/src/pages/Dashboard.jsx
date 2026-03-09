@@ -123,10 +123,10 @@ export default function Dashboard() {
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
               <div className="w-12 h-12 rounded-full bg-white flex items-center justify-center text-emerald-600 font-bold text-xl shadow-lg">
-                {currentUser?.username?.[0]?.toUpperCase() || "U"}
+                {currentUser?.name?.[0]?.toUpperCase() || "U"}
               </div>
               <div>
-                <h3 className="text-white font-semibold text-lg">{currentUser?.username || "User"}</h3>
+                <h3 className="text-white font-semibold text-lg">{currentUser?.name || "User"}</h3>
                 <p className="text-emerald-100 text-sm">{currentUser?.email || ""}</p>
               </div>
             </div>
@@ -153,7 +153,7 @@ export default function Dashboard() {
               onClick={searchNotes}
               className="bg-gradient-to-r from-emerald-600 to-emerald-700 hover:from-emerald-700 hover:to-emerald-800 text-white px-5 rounded-lg transition duration-200 shadow-md font-medium"
             >
-              🔍
+              Search
             </button>
           </div>
 
@@ -189,7 +189,7 @@ export default function Dashboard() {
                       : 'bg-emerald-50 text-emerald-700 hover:bg-emerald-100 border border-emerald-200'
                   }`}
                 >
-                  🏷️ {tag}
+                  {tag}
                 </button>
               ))}
             </div>
@@ -201,8 +201,8 @@ export default function Dashboard() {
           <div className="flex items-center justify-between mb-2">
             <div className="text-sm text-gray-600 font-medium">
               {notes.length} {notes.length === 1 ? 'Note' : 'Notes'}
-              {pinnedNotes.length > 0 && ` • ${pinnedNotes.length} 📌`}
-              {favorites.length > 0 && ` • ${favorites.length} ⭐`}
+              {pinnedNotes.length > 0 && ` • ${pinnedNotes.length} Pinned`}
+              {favorites.length > 0 && ` • ${favorites.length} Favorites`}
             </div>
             <select
               value={sortBy}
@@ -220,7 +220,6 @@ export default function Dashboard() {
         <div className="flex-1 overflow-y-auto p-4">
           {notes.length === 0 ? (
             <div className="text-center py-12">
-              <div className="text-6xl mb-4">📝</div>
               <p className="text-gray-500 font-medium mb-2">No notes yet</p>
               <p className="text-gray-400 text-sm">Create your first note to get started</p>
             </div>
@@ -229,7 +228,7 @@ export default function Dashboard() {
               {/* Pinned Notes */}
               {pinnedNotes.length > 0 && (
                 <div className="mb-6">
-                  <h4 className="text-xs font-semibold text-gray-500 uppercase mb-2 px-2">📌 Pinned</h4>
+                  <h4 className="text-xs font-semibold text-gray-500 uppercase mb-2 px-2">Pinned</h4>
                   {pinnedNotes.map((note) => (
                     <NoteCard
                       key={note._id}
@@ -247,7 +246,7 @@ export default function Dashboard() {
               {/* Favorite Notes */}
               {favoriteNotes.length > 0 && (
                 <div className="mb-6">
-                  <h4 className="text-xs font-semibold text-gray-500 uppercase mb-2 px-2">⭐ Favorites</h4>
+                  <h4 className="text-xs font-semibold text-gray-500 uppercase mb-2 px-2">Favorites</h4>
                   {favoriteNotes.map((note) => (
                     <NoteCard
                       key={note._id}
@@ -322,15 +321,15 @@ function NoteCard({ note, isSelected, isFavorite, onSelect, onToggleFavorite, fo
     >
       <div className="flex items-start justify-between mb-2">
         <div className="flex items-center gap-2 flex-1">
-          {note.pinned && <span className="text-yellow-500" title="Pinned">📌</span>}
+          {note.pinned && <span className="text-yellow-600 text-xs font-semibold bg-yellow-100 px-2 py-0.5 rounded" title="Pinned">Pinned</span>}
           <h3 className="font-semibold text-gray-900 truncate pr-2">
             {note.title || 'Untitled Note'}
           </h3>
         </div>
         <div className="flex items-center gap-2">
           {hasCollaborators && (
-            <span className="text-emerald-600" title="Shared note">
-              👥
+            <span className="flex items-center gap-1 text-xs text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-200">
+              {note.collaborators.length}
             </span>
           )}
           <button
@@ -338,9 +337,13 @@ function NoteCard({ note, isSelected, isFavorite, onSelect, onToggleFavorite, fo
               e.stopPropagation();
               onToggleFavorite();
             }}
-            className="text-xl hover:scale-110 transition duration-200"
+            className={`text-sm px-2 py-0.5 rounded border transition duration-200 ${
+              isFavorite 
+                ? 'bg-yellow-100 text-yellow-600 border-yellow-300 hover:bg-yellow-200' 
+                : 'bg-gray-100 text-gray-600 border-gray-300 hover:bg-gray-200'
+            }`}
           >
-            {isFavorite ? '⭐' : '☆'}
+            {isFavorite ? 'Favorite' : 'Favorite'}
           </button>
         </div>
       </div>
@@ -351,7 +354,7 @@ function NoteCard({ note, isSelected, isFavorite, onSelect, onToggleFavorite, fo
         <div className="flex flex-wrap gap-1 mb-2">
           {note.tags.slice(0, 3).map((tag) => (
             <span key={tag} className="text-xs bg-emerald-100 text-emerald-700 px-2 py-0.5 rounded-full border border-emerald-200">
-              🏷️ {tag}
+              {tag}
             </span>
           ))}
           {note.tags.length > 3 && (
